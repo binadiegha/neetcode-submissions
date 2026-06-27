@@ -1,24 +1,35 @@
 class Solution {
     /**
-     * @param {string[]} strs
-     * @returns {string}
+     * @param {number[]} nums
+     * @return {number[]}
      */
-    encode(strs: string[]): string {
+    productExceptSelf(nums: number[]): number[] {
 
-        const encoded = encodeURI(JSON.stringify(strs.reverse()));
+        const output = new Array(nums.length)
 
-        console.log(encoded)
-        return encoded
-    }
+        let Prefix = 1;
 
-    /**
-     * @param {string} str
-     * @returns {string[]}
-     */
-    decode(str: string): string[] {
+        let Postfix = 1;
 
-        const decoded = JSON.parse(decodeURI(str)).reverse()
 
-        return decoded
+        for (let i = 0; i < nums.length; i++)
+
+        {
+            output[i] = Prefix;
+
+            Prefix *= nums[i];
+
+        }
+
+        for (let i = nums.length - 1; i >= 0; i--)
+
+        {
+            output[i] *= Postfix;
+
+            Postfix *= nums[i];
+        }
+
+
+        return output;
     }
 }
